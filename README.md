@@ -1,5 +1,5 @@
 # ts-when
-kotlin-style when implemented in typescript
+kotlin `when` expression implemented in typescript.
 
 This function approximates the kotlin syntax for `when` which is a switch statement that can optionally support single value or statement evaluations in each switch. It also provides an `otherwise` function to handle the default case. 
 
