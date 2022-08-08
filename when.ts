@@ -1,8 +1,8 @@
-type When<TARGET> = (target: TARGET) => boolean
-type Do<THEN> = () => THEN
-type Statement<TARGET, THEN> = [(When<TARGET>) | TARGET, (Do<THEN> | THEN)]
+export type When<TARGET> = (target: TARGET) => boolean
+export type Do<THEN> = () => THEN
+export type Statement<TARGET, THEN> = [(When<TARGET>) | TARGET, (Do<THEN> | THEN)]
 
-function when<WHEN, THEN>(target: WHEN): (...statements: Array<Statement<WHEN, THEN>>) => THEN {
+export function when<WHEN, THEN>(target: WHEN): (...statements: Array<Statement<WHEN, THEN>>) => THEN {
     return (...statements: Array<Statement<WHEN, THEN>>) => {
         let then: any = null
 
@@ -25,13 +25,4 @@ function when<WHEN, THEN>(target: WHEN): (...statements: Array<Statement<WHEN, T
     }
 }
 
-let otherwise: <WHEN, THEN>(t: (() => THEN) | THEN) => Statement<WHEN, THEN> = (t) => [() => true, t]
-
-// usage
-let result = when(2022)(
-    [2022, () => new Date().toISOString()],
-    [it => it > 2022, '9999-12-31T23:59:59.999Z'],
-    otherwise('1900-01-01T00:00:00.000Z')
-)
-
-console.log(result)  // 2022-07-28T05:32:29.123Z
+export const otherwise: <WHEN, THEN>(t: (() => THEN) | THEN) => Statement<WHEN, THEN> = (t) => [() => true, t]
